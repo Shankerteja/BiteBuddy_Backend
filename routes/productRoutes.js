@@ -6,9 +6,9 @@ const productController=require('../controllers/productController')
 router.post('/add-product/:id',userVerify,productController.addProduct)
 router.get('/:id/products',userVerify,productController.getProductByFirm)
 router.get('/uploads/:imageName',(request,response)=>{
-    const imageName=request.params.imageName;
+    const image=request.params.imageName;
     response.headersSent("Content-Type","image/jpeg");
-    response.sendFile(path.join(__dirname,"..","uploads",imageName))
+    response.sendFile(path.join(__dirname,"..","uploads",image))
 })
 router.delete('/:id',userVerify,productController.deleteProduct)
 module.exports=router;

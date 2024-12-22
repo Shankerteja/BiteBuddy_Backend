@@ -2,7 +2,7 @@ const bcrypt=require('bcryptjs')
 const jwt=require('jsonwebtoken');
 const dotenv=require('dotenv');
 const {Vendor}=require('../models/Vendor');
-
+const path=require("path")
 dotenv.config();
 const secretKey=process.env.SECRET_KEY
 const VendorRegister=async(request,response)=>{
