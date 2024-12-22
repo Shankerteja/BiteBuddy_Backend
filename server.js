@@ -34,7 +34,7 @@ app.listen(PORT,()=>{
 })
 
 app.use('/',(req,res)=>{
-    response.send("<h1>Hi Shanker teja<h1/>")
+    res.send("<h1>Hi Shanker teja<h1/>")
 });
 
 
