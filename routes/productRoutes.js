@@ -1,6 +1,7 @@
 const express=require("express")
 const router=express.Router()
 const userVerify=require("../middleWares/userVerify")
+const path=require('path')
 const productController=require('../controllers/productController')
 router.post('/add-product/:id',userVerify,productController.addProduct)
 router.get('/:id/products',userVerify,productController.getProductByFirm)

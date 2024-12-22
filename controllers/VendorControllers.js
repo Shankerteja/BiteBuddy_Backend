@@ -35,7 +35,7 @@ const VendorRegister=async(request,response)=>{
 
 const venderLogin=async(request,response)=>{
     const {email,password}=request.body;
-    console.log(password)
+
     try{
         const emailExist=await Vendor.findOne({email});
     if(!emailExist){
@@ -61,7 +61,7 @@ const venderLogin=async(request,response)=>{
 const getAllVendors=async (request,response)=>{
     try {
         const vendors= await Vendor.find().populate('firm');
-        console.log(vendors)
+     
         response.status(200).json({vendors});
         
     } catch (error) {
