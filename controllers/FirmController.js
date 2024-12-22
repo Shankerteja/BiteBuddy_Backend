@@ -2,21 +2,17 @@ const multer=require('multer');
 const {firmModel}=require('../models/Firm');
 const {Vendor}=require('../models/Vendor')
 const path=require("path")
-    // Configure storage
-    const storage = multer.diskStorage({
-        destination: (req, file, cb) => {
-          cb(null, 'uploads/'); // Directory to save images
-        },
-        filename: (req, file, cb) => {
-          cb(null, Date.now()+path.extname(file.originalname)); // Unique file name
-        },
-      });
-      // Initialize multer
-    const upload = multer({
-        storage: storage
-      });
+ 
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+      cb(null, 'uploads/'); // Destination folder where the uploaded images will be stored
+  },
+  filename: function(req, file, cb) {
+      cb(null, Date.now() + path.extname(file.originalname)); // Generating a unique filename
+  }
+});
 
-
+const upload = multer({ storage: storage });
 
 const addFirm=async(request,response)=>{
     const {firmName,area,category,region,offer}=request.body;

@@ -3,24 +3,21 @@ const {firmModel}=require('../models/Firm')
 const {Product}=require('../models/product')
 const multer=require("multer");
 const path=require("path")
-  // Configure storage
-    const storage = multer.diskStorage({
-        destination: (req, file, cb) => {
-          cb(null, 'uploads/'); // Directory to save images
-        },
-        filename: (req, file, cb) => {
-          cb(null, Date.now()+path.extname(file.originalname)); // Unique file name
-        },
-      });
-      // Initialize multer
-    const upload = multer({
-        storage: storage
-      });
+ 
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+      cb(null, 'uploads/'); // Destination folder where the uploaded images will be stored
+  },
+  filename: function(req, file, cb) {
+      cb(null, Date.now() + path.extname(file.originalname)); // Generating a unique filename
+  }
+});
 
+const upload = multer({ storage: storage });
 const addProduct=async (request,response)=>{
    try {
     const {productName,price,description,category,bestSeller}=request.body
-    const image=request.file ? request.file.filename : undefined;
+    const image = request.file ? request.file.filename : undefined;
 
     const firmId=request.params.id;
 
@@ -78,4 +75,4 @@ const deleteProduct=async(request,response)=>{
 
 }
 
-module.exports={addProduct:[upload.single("image"),addProduct],getProductByFirm,deleteProduct}
+module.exports={addProduct:[upload.single('image'),addProduct],getProductByFirm,deleteProduct}

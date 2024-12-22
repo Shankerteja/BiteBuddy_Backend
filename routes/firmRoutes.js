@@ -6,9 +6,10 @@ const path=require('path')
 
 router.post('/add-firm',verifyUser,firmController.addFirm)
 router.get('/:id/products',verifyUser,firmController.getAllProductsByFirmId)
-router.get('/uploads/:imageName',(request,response)=>{
-    const imageName=request.params.imageName;
-    response.headersSent("Content-Type","image/jpeg");
-    response.sendFile(path.join(__dirname,"..","uploads",imageName))
-})
+router.get('/uploads/:imageName', (req, res) => {
+    const imageName = req.params.imageName;
+    res.header('Content-Type', 'image/jpeg');
+    res.sendFile(path.join(__dirname, '..', 'uploads', imageName));
+});
+
 module.exports=router;

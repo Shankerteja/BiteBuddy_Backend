@@ -5,10 +5,11 @@ const path=require('path')
 const productController=require('../controllers/productController')
 router.post('/add-product/:id',userVerify,productController.addProduct)
 router.get('/:id/products',userVerify,productController.getProductByFirm)
-router.get('/uploads/:imageName',(request,response)=>{
-    const image=request.params.imageName;
-    response.headersSent("Content-Type","image/jpeg");
-    response.sendFile(path.join(__dirname,"..","uploads",image))
-})
+router.get('/uploads/:imageName', (req, res) => {
+    const imageName = req.params.imageName;
+    res.header('Content-Type', 'image/jpeg');
+    res.sendFile(path.join(__dirname, '..', 'uploads', imageName));
+});
+
 router.delete('/:id',userVerify,productController.deleteProduct)
 module.exports=router;
