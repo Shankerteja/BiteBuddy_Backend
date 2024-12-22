@@ -33,7 +33,9 @@ app.listen(PORT,()=>{
     console.log(`Server is Running at ${PORT}`)
 })
 
-
+app.use('/',(req,res)=>{
+    response.send("<h1>Hi Shanker teja<h1/>")
+});
 
 
 
