@@ -12,6 +12,7 @@ const verifyUser=async (request,response,next)=>{
     let jwtToken;
     if(authHeader!==undefined){
         jwtToken=authHeader.split(' ')[1];
+        
     }
     if(!jwtToken){
        return response.status(401).json({message:"Invalid Access Token"})

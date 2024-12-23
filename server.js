@@ -6,6 +6,7 @@ const vendorRoutes=require('./routes/vendorRoutes')
 const firmRoutes=require('./routes/firmRoutes')
 const productRoutes=require('./routes/productRoutes')
 const path=require("path")
+const cors=require('cors')
 const app=express();
 dotenv.config();
 
@@ -22,6 +23,7 @@ const initialiseDB=async ()=>{
     }
 
 }
+app.use(cors())
 app.use(bodyParser.json())
 app.use('/vendor',vendorRoutes);
 app.use('/firm',firmRoutes)

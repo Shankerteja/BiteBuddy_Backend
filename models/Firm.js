@@ -5,7 +5,7 @@ const Firm=new mongoose.Schema({
     firmName:{
         type:String,
         required:true,
-        unique:true
+  
     },
     area:{
         type:String,
