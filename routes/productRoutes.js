@@ -13,3 +13,6 @@ router.get('/uploads/:imageName', (req, res) => {
 
 router.delete('/:id',userVerify,productController.deleteProduct)
 module.exports=router;
+
+
+

@@ -2,7 +2,7 @@ const bcrypt=require('bcryptjs')
 const jwt=require('jsonwebtoken');
 const dotenv=require('dotenv');
 const {Vendor}=require('../models/Vendor');
-const path=require("path")
+
 dotenv.config();
 const secretKey=process.env.SECRET_KEY
 const VendorRegister=async(request,response)=>{
@@ -38,6 +38,7 @@ const venderLogin=async(request,response)=>{
 
     try{
         const emailExist=await Vendor.findOne({email});
+
     if(!emailExist){
         return response.status(400).json({message:"User Not Registered"});
     }
@@ -45,12 +46,15 @@ const venderLogin=async(request,response)=>{
     if(!passwordMatch){
         return response.status(400).json({message:'Invalid Password'})
     }
+    const vendorId=emailExist._id;
+    const vendorName=emailExist.username;
+    console.log(vendorName)
     const token=jwt.sign({vendorId:emailExist._id},secretKey,{expiresIn:'1h'});
-    response.status(200).json({message:"Login SuccessFully",token});
+    response.status(200).json({message:"Login SuccessFully",token,vendorId,vendorName});
     }
     catch(error){
         response.status(501).json({error:'Internal Server Error'});
-        console.log(error)
+        console.log(error.message)
 
         
     }
@@ -81,8 +85,9 @@ const getSingleVendor=async (request,response)=>{
        return response.status(404).json({error:"Vendor Not Found"})
     }
 
-    response.status(200).json({vendor:vendorDetails});
+    response.status(200).json({vendor:vendorDetails,vendorDetails});
     } catch (error) {
+        console.log(error)
     response.status(500).json({error:"Internal Server Error"})
         
     }
